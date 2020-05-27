@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho - IGTI</title>
+</head>
+<body>
+    <div>
+        <p>(R) Vermelho: <input type="range" id="redRange" min="0" max="255"> <input type="text" name="red" id="redInput" disabled> <br><br></p>
+        <p>(G) Verde: <input type="range" id="greenRange" min="0" max="255"> <input type="text" name="green" id="greenInput" disabled> <br><br></p>
+        <p>(B) Azul: <input type="range" id="blueRange" min="0" max="255"> <input type="text" name="blue" id="blueInput" disabled> <br><br></p>
+    </div>
+
+    <div id="square" style="height: 50px; width: 50px;">
+
+    </div>
+</body>
+</html>
+
+<script>
+    window.addEventListener("load", function() {
+        console.info("Your page is loaded");
+
+        //ranges
+        var redRange = document.getElementById("redRange");
+        var greenRange = document.getElementById("greenRange");
+        var blueRange = document.getElementById("blueRange");
+
+        //inputs
+        var redInput = document.getElementById("redInput");
+        var greenInput = document.getElementById("greenInput");
+        var blueInput = document.getElementById("blueInput");
+
+        var square = document.getElementById('square');
+
+        //set initial rgb;
+        square.style.backgroundColor = `rgb(${redRange.value}, ${greenRange.value}, ${blueRange.value})`;
+
+        redInput.value = redRange.value;
+        redRange.addEventListener('change', () => {
+            redInput.value = redRange.value;
+
+            square.style.backgroundColor = `rgb(${redRange.value}, ${greenRange.value}, ${blueRange.value})`;
+        })
+
+        greenInput.value = greenRange.value;
+        greenRange.addEventListener('change', () => {
+            greenInput.value = greenRange.value;
+
+            square.style.backgroundColor = `rgb(${redRange.value}, ${greenRange.value}, ${blueRange.value})`;
+        })
+
+        blueInput.value = blueRange.value;
+        blueRange.addEventListener('change', () => {
+            blueInput.value = blueRange.value;
+
+            square.style.backgroundColor = `rgb(${redRange.value}, ${greenRange.value}, ${blueRange.value})`;
+        })
+    }, false);
+</script>
