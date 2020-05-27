@@ -19,43 +19,69 @@
 </html>
 
 <script>
-    window.addEventListener("load", function() {
-        console.info("Your page is loaded");
 
-        //ranges
-        var redRange = document.getElementById("redRange");
-        var greenRange = document.getElementById("greenRange");
-        var blueRange = document.getElementById("blueRange");
+    let redInput = null;
+    let greenInput = null;
+    let blueInput = null;
 
-        //inputs
-        var redInput = document.getElementById("redInput");
-        var greenInput = document.getElementById("greenInput");
-        var blueInput = document.getElementById("blueInput");
+    let redRange = null;
+    let greenRange = null;
+    let blueRange = null;
+    
+    let square = null;
 
-        var square = document.getElementById('square');
+    let r = '0';
+    let g = '0';
+    let b = '0';
 
-        //set initial rgb;
-        square.style.backgroundColor = `rgb(${redRange.value}, ${greenRange.value}, ${blueRange.value})`;
+    window.addEventListener('load', () => {
+        mapElements();
+        syncDiv();
+    });
 
-        redInput.value = redRange.value;
-        redRange.addEventListener('change', () => {
-            redInput.value = redRange.value;
+    function mapElements() {
+        redRange = document.querySelector("#redRange")
+        greenRange = document.querySelector("#greenRange")
+        blueRange = document.querySelector("#blueRange")
 
-            square.style.backgroundColor = `rgb(${redRange.value}, ${greenRange.value}, ${blueRange.value})`;
-        })
+        redInput = document.querySelector("#redInput");
+        greenInput = document.querySelector("#greenInput");
+        blueInput = document.querySelector("#blueInput");
 
-        greenInput.value = greenRange.value;
-        greenRange.addEventListener('change', () => {
-            greenInput.value = greenRange.value;
+        redRange.addEventListener('change', handleInputRangeChange)
+        greenRange.addEventListener('change', handleInputRangeChange)
+        blueRange.addEventListener('change', handleInputRangeChange)
 
-            square.style.backgroundColor = `rgb(${redRange.value}, ${greenRange.value}, ${blueRange.value})`;
-        })
+        square = document.querySelector('#square');
+    }
 
-        blueInput.value = blueRange.value;
-        blueRange.addEventListener('change', () => {
-            blueInput.value = blueRange.value;
+    function syncDiv() {
+        square.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 
-            square.style.backgroundColor = `rgb(${redRange.value}, ${greenRange.value}, ${blueRange.value})`;
-        })
-    }, false);
+        redInput.value = r;
+        greenInput.value = g;
+        blueInput.value = b;
+    }
+
+    function handleInputRangeChange(event) {
+        const value = event.target.value;
+        const id = event.target.id;
+
+        console.log(event, value, id);
+
+        switch (id) {
+            case "redRange": 
+                r = value;
+                break;
+
+            case "greenRange": 
+                g = value;
+                break;
+
+            case "blueRange": 
+                b = value;
+                break;
+        }
+        syncDiv();
+    }
 </script>
